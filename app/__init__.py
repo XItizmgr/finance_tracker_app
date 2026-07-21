@@ -7,5 +7,7 @@ def create_app():
     db.init_app(app)
     login_manager.init_app(app)
     migrate.init_app(app, db)
-    from app.models import Account
+    from app.models import User, Account, Category,Budget
     return app
+
+
