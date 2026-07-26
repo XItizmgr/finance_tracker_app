@@ -4,21 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Finance Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <header class="header">
-      <a href="/" class="logo">FinTrack</a>
-      <nav class="nav_bar">
-        <ul class="nav_links">
+  <body class="bg-[#fef8f3] text-[#1f1f1f]">
+    <header class="border-b border-[#eaded5] bg-[#fef8f3]" id="header">
+      <div class="mx-auto flex max-w-7xl item-center justify-between px-6 py-6">
+      <a href="/" class="text-xl font-bold text-[#9e3c01]">FinTrack</a>
+      <nav class=" hidden md:block flex">
+        <ul class="flex gap-8 ">
           <li><a href="#Features">Features</a></li>
           <li><a href="#Pricing">Pricing</a></li>
           <li><a href="#About">About</a></li>
         </ul>
-        <div class="btn-container">
+        <div class="flex justify-between">
           <button class="login_btn">login</button>
           <button class="signup_btn">Sign Up</button>
         </div>
       </nav>
+      </div>
     </header>
     <main>
       <section id="hero">
@@ -29,6 +32,22 @@
               <span>TRUSTED BY 100+ USERS</span>
             </div>
             <h1 id="hero-heading">Take Control of Your <span class="highlight">Financial Future</span></h1>
+            <p class="hero-description">
+                Smart tracking meets automated insights. FinTrack helps you organize your 
+                money, optimize spending, and reach your savings goals faster with AI-driven 
+                budgeting.
+            </p>
+            <div class="hero-cta">
+                <a href="#get-started" class="btn btn-primary">
+                    Get Started for Free 
+                    <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+                <a href="#watch-demo" class="btn btn-secondary">Watch Demo</a>
+            </div>
+        </div>
+        <div class="hero-media">
+            <img src="logo.jpg" alt="FinTrack " class="hero-image">
+        </div>
           </div>
         </div>
       </section>
