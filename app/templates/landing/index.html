@@ -27,10 +27,24 @@
     </header>
     <main>
       <section id="hero" class="w-full bg-[#fdf7f2]">
-        <div class="mx-auto flex max-w-7xl flex-col items-center gap-10 px-6 py-10 lg:flex-row lg:items-center lg:gap-12 lg:py-14">
+        <div class="mx-auto flex max-w-7xl flex-col items-center gap-10 px-6 py-10 lg:flex-row lg:items-center lg:gap-12 lg:py-14 lg:mt:5">
           <div class="order-2 flex flex-1 flex-col items-start lg:order-1">
             <div class="mb-4 inline-flex items-center gap-1.5 rounded-full bg-[#f3e2d6] px-3 py-1">
-              <svg class="badge-icon" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"></svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-[#c85110]"
+              >
+                <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526" />
+                <circle cx="12" cy="8" r="6" class="text-[#c85110]" />
+              </svg>
 
               <span class="text-xs font-semibold tracking-wide text-[#c85110]"> TRUSTED BY 100+ USERS </span>
             </div>
@@ -60,76 +74,285 @@
           </div>
         </div>
       </section>
-      <section class="w-full py-16">
-  <div class="mx-auto max-w-7xl px-6">
-    <div class="text-center">
-      <h2 class="text-3xl font-semibold text-[#1d1b19]">
-        Everything you need to thrive
-      </h2>
+      <section class="w-full py-16" id="Features">
+        <div class="mx-auto max-w-7xl px-6">
+          <div class="text-center">
+            <h2 class="text-3xl font-semibold text-[#1d1b19]">Everything you need to thrive</h2>
 
-      <p class="mt-3 text-sm text-[#895254]">
-        Sophisticated tools built for modern finance, delivered with unparalleled simplicity.
-      </p>
-    </div>
+            <p class="mt-3 text-sm text-[#895254]">Sophisticated tools built for modern finance, delivered with unparalleled simplicity.</p>
+          </div>
 
-    <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div class="rounded-2xl border border-[#f0ded4] bg-[#fdf7f2] p-4 transition-all duration-200 ease-out hover:scale-[1.01] hover:border-[#c85110] hover:shadow-md">
+              <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f3e2d6] text-[#b54b0b]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-minimize2-icon lucide-minimize-2"
+                >
+                  <path d="m14 10 7-7" />
+                  <path d="M20 10h-6V4" />
+                  <path d="m3 21 7-7" />
+                  <path d="M4 14h6v6" />
+                </svg>
+              </div>
 
-      <div class="rounded-2xl border border-[#f0ded4] bg-[#fdf7f2] p-4">
+              <h3 class="mt-5 text-base font-medium text-[#1d1b19]">Automated Tracking</h3>
 
-        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f3e2d6] text-[#b54b0b]">
-          ↔
+              <p class="mt-2 text-l leading-5 text-[#895254]">Connect your accounts and watch your transactions categorize themselves instantly. No more manual entry, just clear visibility.</p>
+            </div>
+
+            <div class="rounded-2xl border border-[#f0ded4] bg-[#fdf7f2] p-4 transition-all duration-200 ease-out hover:scale-[1.01] hover:border-[#c85110] hover:shadow-md">
+              <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f3e2d6] text-[#b54b0b]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-chart-no-axes-combined-icon lucide-chart-no-axes-combined"
+                >
+                  <path d="M12 16v5" />
+                  <path d="M16 14.639V21" />
+                  <path d="M20 10.656V21" />
+                  <path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15" />
+                  <path d="M4 18.463V21" />
+                  <path d="M8 14.656V21" />
+                </svg>
+              </div>
+
+              <h3 class="mt-5 text-base font-medium text-[#1d1b19]">Smart Budgeting</h3>
+
+              <p class="mt-2 text-l leading-5 text-[#895254]">Set dynamic limits that adjust based on your lifestyle. Our AI alerts you before you overspend, keeping your plan on track.</p>
+            </div>
+
+            <div class="rounded-2xl border border-[#f0ded4] bg-[#fdf7f2] p-4 transition-all duration-200 ease-out hover:scale-[1.01] hover:border-[#c85110] hover:shadow-md">
+              <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f3e2d6] text-[#b54b0b]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-flag-icon lucide-flag"
+                >
+                  <path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" />
+                </svg>
+              </div>
+
+              <h3 class="mt-5 text-base font-medium text-[#1d1b19]">Goal Setting</h3>
+
+              <p class="mt-2 text-l leading-5 text-[#895254]">Visualize your future. From buying a home to emergency funds, track your progress with beautiful, motivating indicators.</p>
+            </div>
+          </div>
         </div>
+      </section>
+      <section id="Pricing" class="w-full bg-[#fdf7f2] py-16">
+        <div class="mx-auto max-w-6xl px-6">
+          <div class="text-center">
+            <h2 class="text-2xl font-medium text-[#1d1b19]">Plans for every stage</h2>
 
-        <h3 class="mt-5 text-base font-medium text-[#1d1b19]">
-          Automated Tracking
-        </h3>
+            <p class="mt-2 text-xs text-[#895254]">Whether you're just starting or managing complex portfolios, we have a plan that fits.</p>
+          </div>
 
-        <p class="mt-2 text-l leading-5 text-[#895254]">
-          Connect your accounts and watch your transactions
-          categorize themselves instantly. No more manual
-          entry, just clear visibility.
-        </p>
+          <div class="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
+            <div class="rounded-2xl border border-[#eee0d8] bg-white p-4 py-7 transition-all duration-200 hover:scale-[1.01] hover:border-[#c85110] hover:shadow-md">
+              <p class="text-l font-semibold tracking-[0.2em] text-[#895254]">STARTER</p>
 
-      </div>
+              <div class="mt-2">
+                <span class="text-2xl font-semibold text-[#1d1b19]">$0</span>
+                <span class="text-l text-[#895254]">/mo</span>
+              </div>
 
-      <div class="rounded-2xl border border-[#f0ded4] bg-[#fdf7f2] p-4">
+              <ul class="mt-4 space-y-3 text-l text-[#895254]">
+                <li>-> Basic Connections</li>
+                <li>-> Basic Categorization</li>
+                <li>-> Monthly Reports</li>
+              </ul>
 
-        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f3e2d6] text-[#b54b0b]">
-          ◐
+              <button class="mt-8 w-full rounded-lg border border-[#ecd9d1] py-2 text-l font-medium text-[#1d1b19] transition hover:bg-[#fdf7f2]">Current Plan</button>
+            </div>
+            <div class="relative rounded-2xl border border-[#c85110] bg-white p-4 py-7 shadow-[0_8px_20px_rgba(158,60,1,0.15)] transition-all duration-200 hover:scale-[1.01] hover:shadow-lg">
+              <div class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#9e3c01] px-4 py-1 text-l font-semibold text-white">MOST POPULAR</div>
+
+              <p class="text-l font-semibold tracking-[0.2em] text-[#c85110]">PREMIUM</p>
+
+              <div class="mt-2">
+                <span class="text-2xl font-semibold text-[#1d1b19]">$12</span>
+                <span class="text-l text-[#895254]">/mo</span>
+              </div>
+
+              <ul class="mt-4 space-y-3 text-l text-[#895254]">
+                <li>-> Unlimited Connections</li>
+                <li>-> AI Smart Categorization</li>
+                <li>-> Net Worth Tracking</li>
+                <li>-> Shared Household Wallets</li>
+              </ul>
+
+              <button class="mt-6 w-full rounded-lg bg-[#9e3c01] py-2 text-l font-semibold text-white transition hover:bg-[#873300]">Get Pro</button>
+            </div>
+
+            <div class="rounded-2xl border border-[#eee0d8] bg-white p-4 transition-all duration-200 hover:scale-[1.01] hover:border-[#c85110] hover:shadow-md">
+              <p class="text-l font-semibold tracking-[0.2em] text-[#895254]">ENTERPRISE</p>
+
+              <div class="mt-2">
+                <span class="text-2xl font-semibold text-[#1d1b19]">$49</span>
+                <span class="text-l text-[#895254]">/mo</span>
+              </div>
+
+              <ul class="mt-4 space-y-3 text-l text-[#895254]">
+                <li>-> All Premium Features</li>
+                <li>-> Multi-user Collaboration</li>
+                <li>-> Tax Preparation Export</li>
+                <li>-> Dedicated Support</li>
+              </ul>
+
+              <button class="mt-6 w-full rounded-lg border border-[#ecd9d1] py-2 text-l font-medium text-[#1d1b19] transition hover:bg-[#fdf7f2]">Contact Sales</button>
+            </div>
+          </div>
         </div>
+      </section>
+      <section id="about" class="w-full bg-[#fdf7f2] py-20">
+        <div class="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2">
+          <div>
+            <span class="inline-flex rounded-full bg-[#f3e2d6] px-3 py-1 text-xs font-semibold tracking-wide text-[#c85110]"> ABOUT FINTRACK </span>
 
-        <h3 class="mt-5 text-base font-medium text-[#1d1b19]">
-          Smart Budgeting
-        </h3>
+            <h2 class="mt-4 max-w-xl text-3xl font-semibold leading-tight text-[#1d1b19] lg:text-4xl">
+              Take control of your money,
+              <span class="text-[#9e3c01]"> one step at a time. </span>
+            </h2>
 
-        <p class="mt-2 text-l leading-5 text-[#895254]">
-          Set dynamic limits that adjust based on your
-          lifestyle. Our AI alerts you before you overspend,
-          keeping your plan on track.
-        </p>
+            <p class="mt-5 max-w-xl text-base leading-7 text-[#895254]">
+              FinTrack was created to make personal finance simpler and more approachable. We believe managing your money shouldn't feel complicated or overwhelming.
+            </p>
 
-      </div>
+            <p class="mt-4 max-w-xl text-base leading-7 text-[#895254]">
+              From tracking everyday spending to setting meaningful savings goals, FinTrack gives you the tools and insights you need to understand your finances and build better financial habits.
+            </p>
 
-      <div class="rounded-2xl border border-[#f0ded4] bg-[#fdf7f2] p-4">
 
-        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f3e2d6] text-[#b54b0b]">
-          ⚑
+            <div class="mt-8 flex gap-10">
+              <div>
+                <p class="text-2xl font-semibold text-[#9e3c01]">100+</p>
+                <p class="mt-1 text-xs text-[#895254]">Happy Users</p>
+              </div>
+
+              <div>
+                <p class="text-2xl font-semibold text-[#9e3c01]">10+</p>
+                <p class="mt-1 text-xs text-[#895254]">Transactions Tracked</p>
+              </div>
+
+              <div>
+                <p class="text-2xl font-semibold text-[#9e3c01]">24/7</p>
+                <p class="mt-1 text-xs text-[#895254]">Financial Insights</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <img
+              src="{{ url_for('static', filename='images/about-img.png') }}"
+              alt="People managing their finances"
+              class="w-full rounded-3xl object-cover shadow-sm transition-transform duration-300 hover:-rotate-1 hover:scale-[1.01]"
+            />
+          </div>
         </div>
-
-        <h3 class="mt-5 text-base font-medium text-[#1d1b19]">
-          Goal Setting
-        </h3>
-
-        <p class="mt-2 text-l leading-5 text-[#895254]">
-          Visualize your future. From buying a home to
-          emergency funds, track your progress with beautiful,
-          motivating indicators.
-        </p>
-      </div>
-    </div>
-
-  </div>
-</section>
+      </section>
     </main>
+    <footer class="w-full border-t border-[#eee0d8] bg-white-300">
+      <div class="mx-auto max-w-7xl px-6 py-12">
+        <div class="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
+          <div class="md:col-span-1">
+            <a href="/" class="text-xl font-bold text-[#9e3c01]"> FinTrack </a>
+
+            <p class="mt-4 max-w-xs text-sm leading-6 text-[#895254]">Take control of your finances, build better habits, and reach your financial goals with confidence.</p>
+          </div>
+
+          <div>
+            <h3 class="text-sm font-semibold text-[#1d1b19]">Product</h3>
+
+            <ul class="mt-4 space-y-3 text-sm text-[#895254]">
+              <li>
+                <a href="#Features" class="transition hover:text-[#9e3c01]"> Features </a>
+              </li>
+
+              <li>
+                <a href="#Pricing" class="transition hover:text-[#9e3c01]"> Pricing </a>
+              </li>
+
+              <li>
+                <a href="#About" class="transition hover:text-[#9e3c01]"> About </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-sm font-semibold text-[#1d1b19]">Company</h3>
+
+            <ul class="mt-4 space-y-3 text-sm text-[#895254]">
+              <li>
+                <a href="#" class="transition hover:text-[#9e3c01]"> About Us </a>
+              </li>
+
+              <li>
+                <a href="https://github.com/XItizmgr" target="_blank" class="transition hover:text-[#9e3c01]"> Contact </a>
+              </li>
+
+              <li>
+                <a href="#" class="transition hover:text-[#9e3c01]"> Blog </a>
+              </li>
+
+              <li>
+                <a href="#" class="transition hover:text-[#9e3c01]"> Careers </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-sm font-semibold text-[#1d1b19]">Legal</h3>
+
+            <ul class="mt-4 space-y-3 text-sm text-[#895254]">
+              <li>
+                <a href="#" class="transition hover:text-[#9e3c01]"> Privacy Policy </a>
+              </li>
+
+              <li>
+                <a href="#" class="transition hover:text-[#9e3c01]"> Terms of Service </a>
+              </li>
+
+              <li>
+                <a href="#" class="transition hover:text-[#9e3c01]"> Security </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-10 flex flex-col gap-4 border-t border-[#eee0d8] pt-6 text-xs text-[#895254] text-center sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 FinTrack. All rights reserved.</p>
+
+          <div class="flex gap-5 justify-center">
+            <a href="https://www.instagram.com/kshitizbudhamagar/" class="transition hover:text-[#9e3c01]"> Instagram </a>
+
+            <a href="https://github.com/XItizmgr" target="_blank" class="transition hover:text-[#9e3c01]"> GitHub </a>
+
+            <a href="#" class="transition hover:text-[#9e3c01]"> Linkden </a>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
