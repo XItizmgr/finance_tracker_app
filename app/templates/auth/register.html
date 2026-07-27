@@ -1,201 +1,96 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RegisterForm</title>
-    <link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='css/output.css') }}"
->
-  </head>
-  <body class="bg-[#fbf2ec] text-[#1f1f1f] min-h-screen">
-    <main class="min-h-screen flex items-center justify-center p-4 sm:p-8 lg:p-12">
-      <div class="w-full max-w-6xl overflow-hidden bg-[#fbf2ec] ">
-        <div class="flex flex-col lg:flex-row ">
-          <section class="flex flex-1 flex-col justify-center px-8 py-12 sm:px-12 lg:px-14 bg-[#fbf2ec]">
-                    <h1 class="text-4xl font-bold tracking-tight text-[#9e3c01]">
-                        FinTrack
-                    </h1>
-                    <p class="mt-4 max-w-md text-lg leading-relaxed text-[#3f3f3f]">
-                        Master your financial journey with precision and clarity.
-                    </p>
-                    <div class="mt-10 space-y-8">
-                        <div class="flex gap-4">
-                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#f7e2d3] text-[#9e3c01]">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="22"
-                                    height="22"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                >
-                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                                </svg>
+{% extends "auth/base_auth.html" %} {% block title %} FinTrack_Register {% endblock %} {% block content %}
+<div class="flex items-center justify-center p-4 sm:p-8 lg:p-12">
+  <div class="w-full max-w-6xl overflow-hidden bg-[#fbf2ec]">
+    <div class="flex flex-col lg:flex-row">
+      <section class="flex flex-1 flex-col justify-center px-8 py-12 sm:px-12 lg:px-14 bg-[#fbf2ec]">
+        <h1 class="text-4xl font-bold tracking-tight text-[#9e3c01]">FinTrack</h1>
+        <p class="mt-4 max-w-md text-lg leading-relaxed text-[#3f3f3f]">Master your financial journey with precision and clarity.</p>
+        <div class="mt-10 space-y-8">
+          <div class="flex gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#f7e2d3] text-[#9e3c01]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <div>
+              <h2 class="font-semibold text-[#1f1f1f]">Bank-Grade Security</h2>
+              <p class="mt-1 max-w-sm text-sm leading-relaxed text-gray-600">Your data is protected with 256-bit encryption and multi-factor authentication.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#f7e2d3] text-[#9e3c01]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 3v18h18" />
+                <path d="m7 16 4-5 3 3 5-7" />
+              </svg>
+            </div>
+            <div>
+              <h2 class="font-semibold text-[#1f1f1f]">Smart Insights</h2>
+              <p class="mt-1 max-w-sm text-sm leading-relaxed text-gray-600">Automated budgeting and AI-driven savings recommendations tailored for you.</p>
+            </div>
+          </div>
+        </div>
 
-                            </div>
-                            <div>
-                                <h2 class="font-semibold text-[#1f1f1f]">
-                                    Bank-Grade Security
-                                </h2>
-                                <p class="mt-1 max-w-sm text-sm leading-relaxed text-gray-600">
-                                    Your data is protected with 256-bit encryption
-                                    and multi-factor authentication.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#f7e2d3] text-[#9e3c01]">
+        <div class="mt-12 border-t border-[#eaded5] pt-8">
+          <p class="text-xs font-medium uppercase tracking-widest text-gray-500">Trusted by professionals at</p>
+          <div class="mt-4 flex gap-8 text-lg font-semibold text-gray-400">
+            <span>VERTEX</span>
+            <span>LUMINA</span>
+            <span>ORBIT</span>
+          </div>
+        </div>
+      </section>
+      <section class="flex-1 bg-white px-8 py-10 rounded-3xl shadow-sm sm:px-12 lg:px-14">
+        <form action="{{ url_for('auth.register') }}" method="POST" class="mx-auto max-w-lg">
+          {{ form.hidden_tag() }}
+          <div>
+            <h2 class="text-3xl font-semibold tracking-tight text-[#1f1f1f]">Create your account</h2>
+            <p class="mt-2 text-sm text-gray-500">Join thousands of users managing their wealth better.</p>
+          </div>
+          <div class="mt-8">
+            {{ form.username.label( class="mb-2 block text-sm font-medium text-gray-700" ) }} {{ form.username( class="w-full rounded-lg border border-[#eaded5] bg-white px-4 py-3 text-sm outline-none
+            transition placeholder:text-gray-400 focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10", placeholder="Xitiz mgr" ) }} {% for error in form.username.errors %}
+            <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+            {% endfor %}
+          </div>
+          <div class="mt-5">
+            {{ form.email.label( class="mb-2 block text-sm font-medium text-gray-700" ) }} {{ form.email( class="w-full rounded-lg border border-[#eaded5] bg-white px-4 py-3 text-sm outline-none
+            transition placeholder:text-gray-400 focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10", placeholder="xitiz@example.com" ) }} {% for error in form.email.errors %}
 
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="22"
-                                    height="22"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                >
-                                    <path d="M3 3v18h18"/>
-                                    <path d="m7 16 4-5 3 3 5-7"/>
-                                </svg>
+            <p class="mt-1 text-sm text-red-600">{{ error }}</p>
 
-                            </div>                  
-                            <div>
-                                <h2 class="font-semibold text-[#1f1f1f]">
-                                    Smart Insights
-                                </h2>
-                                <p class="mt-1 max-w-sm text-sm leading-relaxed text-gray-600">
-                                    Automated budgeting and AI-driven savings
-                                    recommendations tailored for you.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+            {% endfor %}
+          </div>
+          <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div>
+              {{ form.password.label( class="mb-2 block text-sm font-medium text-gray-700" ) }} {{ form.password( class="w-full rounded-lg border border-[#eaded5] bg-white px-4 py-3 text-sm
+              outline-none transition placeholder:text-gray-400 focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10", placeholder="••••••••" ) }} {% for error in form.password.errors %}
 
-                    <div class="mt-12 border-t border-[#eaded5] pt-8">
-                        <p class="text-xs font-medium uppercase tracking-widest text-gray-500">
-                            Trusted by professionals at
-                        </p>
-                        <div class="mt-4 flex gap-8 text-lg font-semibold text-gray-400">
-                            <span>VERTEX</span>
-                            <span>LUMINA</span>
-                            <span>ORBIT</span>
-                        </div>
-                    </div>
-                </section>
-          
-       
-       
-            <section class="flex-1 bg-white px-8 py-10 rounded-3xl  shadow-sm sm:px-12 lg:px-14 ">
-                    <form action="{{ url_for('auth.register') }}"method="POST" class="mx-auto max-w-lg">
-                        {{ form.hidden_tag() }}
-                        <div>
-                            <h2 class="text-3xl font-semibold tracking-tight text-[#1f1f1f]">
-                                Create your account
-                            </h2>
-                            <p class="mt-2 text-sm text-gray-500">
-                                Join thousands of users managing their wealth better.
-                            </p>
-                        </div>
-                        <div class="mt-8">
-                            {{ form.username.label(
-                                class="mb-2 block text-sm font-medium text-gray-700"
-                            ) }}
-                            {{ form.username(
-                                class="w-full rounded-lg border border-[#eaded5] bg-white px-4 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10",
-                                placeholder="Xitiz mgr"
-                            ) }}
-                            {% for error in form.username.errors %}
-                                <p class="mt-1 text-sm text-red-600">
-                                    {{ error }}
-                                </p>
-                            {% endfor %}
-                        </div>
-                        <div class="mt-5">
+              <p class="mt-1 text-sm text-red-600">{{ error }}</p>
 
-                            {{ form.email.label(
-                                class="mb-2 block text-sm font-medium text-gray-700"
-                            ) }}
+              {% endfor %}
+            </div>
+            <div>
+              {{ form.confirm_password.label( class="mb-2 block text-sm font-medium text-gray-700" ) }} {{ form.confirm_password( class="w-full rounded-lg border border-[#eaded5] bg-white px-4 py-3
+              text-sm outline-none transition placeholder:text-gray-400 focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10", placeholder="••••••••" ) }} {% for error in
+              form.confirm_password.errors %}
 
-                            {{ form.email(
-                                class="w-full rounded-lg border border-[#eaded5] bg-white px-4 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10",
-                                placeholder="xitiz@example.com"
-                            ) }}
+              <p class="mt-1 text-sm text-red-600">{{ error }}</p>
 
-                            {% for error in form.email.errors %}
-
-                                <p class="mt-1 text-sm text-red-600">
-                                    {{ error }}
-                                </p>
-
-                            {% endfor %}
-
-                        </div>
-                        <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
-                            <div>
-                                {{ form.password.label(
-                                    class="mb-2 block text-sm font-medium text-gray-700"
-                                ) }}
-
-                                {{ form.password(
-                                    class="w-full rounded-lg border border-[#eaded5] bg-white px-4 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10",
-                                    placeholder="••••••••"
-                                ) }}
-
-                                {% for error in form.password.errors %}
-
-                                    <p class="mt-1 text-sm text-red-600">
-                                        {{ error }}
-                                    </p>
-
-                                {% endfor %}
-
-                            </div>
-                            <div>
-
-                                {{ form.confirm_password.label(
-                                    class="mb-2 block text-sm font-medium text-gray-700"
-                                ) }}
-
-                                {{ form.confirm_password(
-                                    class="w-full rounded-lg border border-[#eaded5] bg-white px-4 py-3 text-sm outline-none transition placeholder:text-gray-400 focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10",
-                                    placeholder="••••••••"
-                                ) }}
-
-                                {% for error in form.confirm_password.errors %}
-
-                                    <p class="mt-1 text-sm text-red-600">
-                                        {{ error }}
-                                    </p>
-
-                                {% endfor %}
-
-                            </div>
-
-                        </div>
-                        <div class="mt-7">
-
-                            {{ form.submit(
-                                class="w-full cursor-pointer rounded-lg bg-[#b44702] px-6 py-3.5 font-semibold text-white shadow-sm transition hover:bg-[#963b02] focus:outline-none focus:ring-2 focus:ring-[#b44702]/30"
-                            ) }}
-
-                        </div>
-                        <p class="mt-7 text-center text-sm text-gray-500">
-                            Already have an account?
-                            <a href="{{ url_for('auth.login') }}" class="font-semibold text-[#9e3c01] hover:underline">
-                                Sign In
-                            </a>
-                        </p>
-                    </form>
-                </section>
-      </div>
-    </main>
-  </body>
-</html>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="mt-7">
+            {{ form.submit( class="w-full cursor-pointer rounded-lg bg-[#b44702] px-6 py-3.5 font-semibold text-white shadow-sm transition hover:bg-[#963b02] focus:outline-none focus:ring-2
+            focus:ring-[#b44702]/30" ) }}
+          </div>
+          <p class="mt-7 text-center text-sm text-gray-500">
+            Already have an account?
+            <a href="{{ url_for('auth.login') }}" class="font-semibold text-[#9e3c01] hover:underline"> Sign In </a>
+          </p>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>
+{% endblock %}

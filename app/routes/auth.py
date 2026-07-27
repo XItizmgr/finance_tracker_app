@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from app.models.user import User
 from app.forms.register_form import RegisterForm
+from app.forms.login_form import loginForm
 from app.extensions import db
-
+from flask_login import login_user
 
 auth_bp = Blueprint("auth", __name__)
 
@@ -26,9 +27,22 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         flash("Account created successfully!")
-        
-    return render_template("auth/register.html" ,form=form)
 
-@auth_bp.route("/login",methods=["POST","post"])
-def login ():
-    return render_template("auth/login.html")
+    return render_template("auth/register.html", form=form)
+
+
+@auth_bp.route("/login", methods=["GET", "POST"])
+def login():
+    form = loginForm()
+    if form.validate_on_submit():
+        existing_user = User.query.filter_by(email=form.Email.data).first()
+        if not existing_user:
+            flash("Invalid email or password")
+            return render_template("auth/login.html", form=form)
+        if check_password_hash(existing_user.password_hash, form.password.data):
+            login_user(existing_user)
+            flash("Login Sucessfull")
+            return redirect(url_for("dashboard.dashboard"))
+        flash("Invalid email or password")
+
+    return render_template("auth/login.html", form=form)

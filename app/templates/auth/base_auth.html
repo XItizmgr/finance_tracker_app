@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{% block title %}FinTrack{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}" />
+  </head>
+
+  <body class="min-h-screen bg-[#fbf2ec] flex flex-col">
+    <main class="flex-1">{% block content %} {% endblock %}</main>
+
+    <footer class="border-t border-[#eadbd2] bg-[#fbf2ec]">
+      <div class="max-w-7xl mx-auto px-6 py-7 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+
+        <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-5">
+          <span class="text-xl font-bold text-[#9e3c01]"> FinTrack</span>
+
+          <span class="text-sm text-gray-600"> © 2026 FinTrack Inc. All rights reserved. </span>
+        </div>
+
+        <nav class="flex flex-wrap gap-6 text-sm text-gray-600">
+          <a href="#" class="transition-colors hover:text-[#9e3c01]"> Privacy Policy </a>
+
+          <a href="#" class="transition-colors hover:text-[#9e3c01]"> Terms of Service </a>
+
+          <a href="#" class="transition-colors hover:text-[#9e3c01]"> Security </a>
+
+          <a href="#" class="transition-colors hover:text-[#9e3c01]"> Contact </a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
