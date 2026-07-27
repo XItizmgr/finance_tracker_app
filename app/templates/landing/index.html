@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Finance Tracker</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
   </head>
   <body class="bg-[#fffefe] text-[#1f1f1f]">
     <header class="w-full border-b border-gray-200/60 shadow-[0_2px_4px_rgba(0,0,0,0.04)] bg-[#fff6f2]">
@@ -21,7 +26,7 @@
         </nav>
         <div class="flex flex-1 justify-end items-center gap-4">
           <a href="/login">Login</a>
-          <a href="/register" class="rounded-lg bg-[#9e3c01] px-6 py-3 font-semibold text-white">Sign Up </a>
+          <a href="{{url_for('auth.register')}}" class="rounded-lg bg-[#9e3c01] px-6 py-3 font-semibold text-white">Sign Up </a>
         </div>
       </div>
     </header>
@@ -227,7 +232,7 @@
           </div>
         </div>
       </section>
-      <section id="about" class="w-full bg-[#fdf7f2] py-20">
+      <section id="About" class="w-full bg-[#fdf7f2] py-20">
         <div class="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2">
           <div>
             <span class="inline-flex rounded-full bg-[#f3e2d6] px-3 py-1 text-xs font-semibold tracking-wide text-[#c85110]"> ABOUT FINTRACK </span>
@@ -244,7 +249,6 @@
             <p class="mt-4 max-w-xl text-base leading-7 text-[#895254]">
               From tracking everyday spending to setting meaningful savings goals, FinTrack gives you the tools and insights you need to understand your finances and build better financial habits.
             </p>
-
 
             <div class="mt-8 flex gap-10">
               <div>
