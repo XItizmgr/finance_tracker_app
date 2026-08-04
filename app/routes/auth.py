@@ -27,6 +27,9 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         flash("Account created successfully!")
+        return redirect(
+            url_for("auth.login")
+)
 
     return render_template("auth/register.html", form=form)
 
@@ -36,13 +39,18 @@ def login():
     form = loginForm()
     if form.validate_on_submit():
         existing_user = User.query.filter_by(email=form.Email.data).first()
-        if not existing_user:
-            flash("Invalid email or password")
-            return render_template("auth/login.html", form=form)
-        if check_password_hash(existing_user.password_hash, form.password.data):
-            login_user(existing_user)
-            flash("Login Sucessfull")
-            return redirect(url_for("dashboard.dashboard"))
-        flash("Invalid email or password")
 
+        if not existing_user:
+            flash("Invalid email", "error")
+            return render_template("auth/login.html", form=form)
+        if not check_password_hash(existing_user.password_hash, form.password.data):
+            flash("Incorrect password.", "error")
+            return render_template("auth/login.html", form=form)
+        login_user(existing_user,remember = form.remember_me.data)
+        flash("Login successful!", "success")
+        return redirect(url_for("dashboard.dashboard"))
     return render_template("auth/login.html", form=form)
+
+@auth_bp.route("/base")
+def base():
+    return render_template("base.html")

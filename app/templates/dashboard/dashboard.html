@@ -1,8 +1,139 @@
-{%extends "base.html"%}
-{% block title %} FinTrack_Dashboard {% endblock %}
-{%block content%}
+{%extends "base.html"%} {% block title %} FinTrack_Dashboard {% endblock %} {%block content%}
+<div class="space-y-2">
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+    <div class="bg-[#fffefe] rounded-2xl p-6 border border-[#ffe6e6] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl">
+      <div class="flex gap-5 items-center justify-center">
+        <p class="text-xl text-[#bab2ae]">Total Balance</p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" class="w-30">
+          <rect width="64" height="64" rx="16" fill="#F8EFEA" />
+          <rect x="18" y="21" width="28" height="22" rx="4" stroke="#8C3A00" stroke-width="2.5" fill="none" />
+          <path d="M 38 28 H 46 V 36 H 38 A 4 4 0 0 1 38 28 Z" fill="#F8EFEA" stroke="#8C3A00" stroke-width="2.5" stroke-linejoin="round" />
+          <circle cx="41.5" cy="32" r="1.5" fill="#8C3A00" />
+        </svg>
+      </div>
+      <h2 class="text-3xl font-bold mt-2 text-[#1e1c1b]" id="balance">$12,500.00</h2>
+      <p class="text-sm text-[#b87449] mt-2">+8.5% from last month</p>
+    </div>
+    <div class="bg-[#fffefe] rounded-2xl p-6 border border-[#ffe6e6] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl">
+      <div class="flex gap-5 items-center justify-center">
+        <p class="text-xl text-[#bab2ae]">Monthly Income</p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" class="w-30">
+          <rect width="64" height="64" rx="16" fill="#F8EFEA" />
+          <path d="M 18 29 C 18 27.5 19 26.5 20.5 26.5 H 42.5 C 44 26.5 45 27.5 45 29 V 31" stroke="#8C3A00" stroke-width="2.5" stroke-linecap="round" />
+          <path d="M 18 29 V 38 C 18 39.5 19 40.5 20.5 40.5 H 22" stroke="#8C3A00" stroke-width="2.5" stroke-linecap="round" />
+          <rect x="22" y="30" width="24" height="13" rx="3" stroke="#8C3A00" stroke-width="2.5" fill="#F8EFEA" />
+          <circle cx="34" cy="36.5" r="2.5" stroke="#8C3A00" stroke-width="2" fill="none" />
+        </svg>
+      </div>
+
+      <h2 class="text-3xl font-bold mt-2 text-[#1e1c1b]" id="balance">$12,500.00</h2>
+      <p class="text-sm text-[#b87449] mt-2">+8.5% from last month</p>
+    </div>
+    <div class="bg-[#fffefe] rounded-2xl p-6 border border-[#ffe6e6] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl">
+      <div class="flex gap-5 items-center justify-center">
+        <p class="text-xl text-[#bab2ae]">Monthly Expense</p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" class="w-30">
+          <rect width="64" height="64" rx="16" fill="#FDECEE" />
+          <path d="M 18 22 H 22 L 25.5 37 H 42 L 46 25 H 23" stroke="#BA1A1A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          <circle cx="27.5" cy="42.5" r="2.2" fill="#BA1A1A" />
+          <circle cx="40" cy="42.5" r="2.2" fill="#BA1A1A" />
+        </svg>
+      </div>
+      <h2 class="text-3xl font-bold mt-2 text-[#1e1c1b]" id="balance">$12,500.00</h2>
+      <p class="text-sm text-[#b87449] mt-2">+8.5% from last month</p>
+    </div>
+    <div class="group bg-white rounded-2xl border border-gray-100 p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <p class="text-sm font-medium text-[#bab2ae] uppercase tracking-wide">Savings Goal</p>
+        </div>
+
+        <span class="text-lg font-bold text-[#9e3c01]"> 82% </span>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="w-20 h-20 rounded-full border-[6px] border-[#9e3c01] flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+          <span class="text-sm font-semibold text-gray-700"> 82% </span>
+        </div>
+
+        <div>
+          <p class="text-sm text-gray-500">Vacation Fund</p>
+
+          <h3 class="text-xl font-bold text-gray-800">
+            $8,200
+            <span class="text-gray-400 text-base font-medium"> / $10,000 </span>
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col lg:flex-row gap-4">
+    <div class="flex-1 min-h-[400px] bg-white rounded-2xl border border-[#e6e6e6]"></div>
+    <div class="w-full lg:w-[320px] space-y-4">
+      <div class="bg-white p-5 space-y-5 rounded-2xl border border-[#e6e6e6]">
+        <p class="text-[#bebebc] text-xl font-semibold">Quick Actions</p>
+        <div class="flex gap-4">
+          <div
+            class="flex-1 min-h-[120px] bg-[#f4ebe4] rounded-2xl border border-[#d3ae92] p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md group"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-8 h-8 text-[#b85c00] transition-transform duration-300 group-hover:scale-110"
+            >
+              <circle cx="12" cy="12" r="8.5" />
+              <path stroke-linecap="round" d="M12 8v8M8 12h8" />
+            </svg>
+            <span class="mt-3 text-[#a94f00] font-medium"> Add New </span>
+          </div>
+          <div
+            class="flex-1 min-h-[120px] bg-[#f4f1f0] rounded-2xl border border-[#d8d0cd] p-5 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md group"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-8 h-8 text-[#806b63] transition-transform duration-300 group-hover:scale-110"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 9h13" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="m13 5 4 4-4 4" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20 15H7" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="m11 11-4 4 4 4" />
+            </svg>
+
+            <span class="mt-3 text-[#806b63] font-medium"> Transfer </span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white min-h-[250px] rounded-2xl border border-[#e6e6e6]"></div>
+    </div>
+  </div>
+  <div>
+    <div class="bg-white rounded-2xl border border-[#e6e6e6] p-5">
+      <div class="flex items-center justify-between">
+        <p>Recent Transactions</p>
+
+        <button>View All</button>
+      </div>
+
+
+      <div>
 
 
 
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <canvas id="myChart"></canvas>
+</div>
 
 {%endblock%}
