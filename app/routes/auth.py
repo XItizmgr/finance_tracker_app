@@ -4,10 +4,15 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app.models.user import User
 from app.forms.register_form import RegisterForm
 from app.forms.login_form import loginForm
-from app.forms.Forget_password import ForgetPassword
-from app.forms.password_reset import PasswordRest
 from app.extensions import db
 from flask_login import login_user
+
+from app.forms.Forget_password_form import ForgetPassword
+from app.forms.password_reset_form import PasswordRest
+from app.utils.helpers import generate_reset_token
+from app.utils.helpers import verify_reset_token
+from app.services.email_service import send_password_reset_link
+
 
 auth_bp = Blueprint("auth", __name__)
 
@@ -57,13 +62,47 @@ def base():
     return render_template("base.html")
 
 
-@auth_bp.route("/forget_pasword", methods=["GET", "POST"])
+@auth_bp.route("/forget_password", methods=["GET", "POST"])
 def forgetPassword():
     form = ForgetPassword()
-    return render_template("auth/forget_password.html",form = form)
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.Email.data).first()
+
+        if user:
+            token = generate_reset_token(user.user_id)
+
+            reset_url = url_for("auth.passwordReset", token=token, _external=True)
+
+            send_password_reset_link(user.email, reset_url)
+            flash(
+                "A password reset link has been sent.",
+                "info",
+            )
+            return redirect(url_for("auth.login"))
+        flash("account doesn't exists with this email", "warning")
+
+    return render_template("auth/forget_password.html", form=form)
 
 
-@auth_bp.route("/password_reset",methods=["POST","GET"])
-def passwordReset():
+@auth_bp.route("/reset_password/<token>", methods=["POST", "GET"])
+def passwordReset(token):
+    user_id = verify_reset_token(token)
+    if user_id is None:
+        flash("The reset link is invalid or has expired.", "danger")
+        return redirect(url_for("auth.forgetPassword"))
+    user = User.query.get(user_id)
+    if user is None:
+        flash("Invalid reset link.", "danger")
+        return redirect(url_for("auth.forgetPassword"))
     form = PasswordRest()
-    return render_template("auth/password_reset.html",form=form)
+    if form.validate_on_submit():
+        if check_password_hash(user.password_hash, form.Password.data):
+            flash(
+                "New password must be different from your current password.", "warning"
+            )
+        else:
+            user.password_hash = generate_password_hash(form.Password.data)
+            db.session.commit()
+            flash("Your password has been reset successfully.", "success")
+            return redirect(url_for("auth.login"))
+    return render_template("auth/password_reset.html", form=form, token=token)
