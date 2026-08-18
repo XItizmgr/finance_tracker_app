@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms.validators import data_required, email, length, equal_to
-from wtforms import StringField, PasswordField, SubmitField, EmailField
+from wtforms import EmailField, PasswordField, StringField, SubmitField
+from wtforms.validators import data_required, email, equal_to, length
 
 
 class RegisterForm(FlaskForm):

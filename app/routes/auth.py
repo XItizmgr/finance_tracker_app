@@ -4,6 +4,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app.models.user import User
 from app.forms.register_form import RegisterForm
 from app.forms.login_form import loginForm
+from app.forms.Forget_password import ForgetPassword
+from app.forms.password_reset import PasswordRest
 from app.extensions import db
 from flask_login import login_user
 
@@ -27,9 +29,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         flash("Account created successfully!")
-        return redirect(
-            url_for("auth.login")
-)
+        return redirect(url_for("auth.login"))
 
     return render_template("auth/register.html", form=form)
 
@@ -46,11 +46,24 @@ def login():
         if not check_password_hash(existing_user.password_hash, form.password.data):
             flash("Incorrect password.", "error")
             return render_template("auth/login.html", form=form)
-        login_user(existing_user,remember = form.remember_me.data)
+        login_user(existing_user, remember=form.remember_me.data)
         flash("Login successful!", "success")
         return redirect(url_for("dashboard.dashboard"))
     return render_template("auth/login.html", form=form)
 
+
 @auth_bp.route("/base")
 def base():
     return render_template("base.html")
+
+
+@auth_bp.route("/forget_pasword", methods=["GET", "POST"])
+def forgetPassword():
+    form = ForgetPassword()
+    return render_template("auth/forget_password.html",form = form)
+
+
+@auth_bp.route("/password_reset",methods=["POST","GET"])
+def passwordReset():
+    form = PasswordRest()
+    return render_template("auth/password_reset.html",form=form)
