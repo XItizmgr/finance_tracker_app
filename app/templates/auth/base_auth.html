@@ -8,9 +8,7 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}" />
   </head>
-
   <body class="min-h-screen bg-[#fbf2ec] flex flex-col">
-    <!-- Global Flash Messages Container -->
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         <div class="mx-auto w-full max-w-md px-6 pt-6">
@@ -38,14 +36,10 @@
         <p class="text-sm text-gray-600">
           Developed by Xitizmgr
         </p>
-
         <nav class="flex flex-wrap gap-6 text-sm text-gray-600">
           <a href="#" class="transition-colors hover:text-[#9e3c01]"> Privacy Policy </a>
-
           <a href="#" class="transition-colors hover:text-[#9e3c01]"> Terms of Service </a>
-
           <a href="#" class="transition-colors hover:text-[#9e3c01]"> Security </a>
-
           <a href="#" class="transition-colors hover:text-[#9e3c01]"> Contact </a>
         </nav>
       </div>

@@ -79,10 +79,13 @@ def forgetPassword():
                 "info",
             )
             return redirect(url_for("auth.login"))
-        flash("account doesn't exists with this email", "warning")
+        flash(
+            "If an account exists with that email, "
+            "a password reset link has been sent.",
+            "info",
+        )
 
     return render_template("auth/forget_password.html", form=form)
-
 
 @auth_bp.route("/reset_password/<token>", methods=["POST", "GET"])
 def passwordReset(token):
