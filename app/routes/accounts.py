@@ -4,7 +4,10 @@ from flask_login import login_required, current_user
 from app.forms.account_form import AccountForm
 from app.models.account import Account
 from app.extensions import db
+
 acc_bp = Blueprint("acc", __name__)
+
+
 @acc_bp.route("/account", methods=["GET", "POST"])
 @login_required
 def account():
@@ -16,12 +19,9 @@ def account():
             balance=form.balance.data,
             user_id=current_user.user_id,
         )
-
         db.session.add(new_account)
         db.session.commit()
-
         flash("Your account is successfully created :)")
-
         return redirect(url_for("acc.account"))
-
-    return render_template("account.html", form=form)
+    accounts = Account.query.filter_by(user_id=current_user.user_id).all()
+    return render_template("account.html", form=form , accounts = accounts)

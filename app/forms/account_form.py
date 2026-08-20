@@ -18,7 +18,5 @@ class AccountForm(FlaskForm):
         ],
         validators=[DataRequired()],
     )
-
     balance = DecimalField("Enter the balance", validators=[DataRequired()])
-
     submit = SubmitField("Add Account")
