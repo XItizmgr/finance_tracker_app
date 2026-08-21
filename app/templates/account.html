@@ -1,5 +1,7 @@
 {% extends "base.html" %} {% block title %}FinTrack Account{% endblock %} {% block page_title %}Account{% endblock %} {% block content %}
+
 <main class="mx-auto max-w-7xl px-6 py-8">
+  <!-- Page Header -->
   <header class="mb-8 flex items-center justify-between">
     <div>
       <h1 class="text-3xl font-semibold text-[#22201e]">Accounts</h1>
@@ -16,6 +18,8 @@
       Add Account
     </button>
   </header>
+
+  <!-- Flash Messages -->
   {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
 
   <div class="mb-6 space-y-2">
@@ -28,12 +32,16 @@
 
   {% endif %} {% endwith %}
 
+  <!-- Accounts Section -->
   <section>
     {% if not accounts %}
+
+    <!-- Empty State -->
+
     <div class="flex min-h-[420px] items-center justify-center rounded-2xl border border-[#eaded5] bg-[#fffaf6]">
       <div class="max-w-md text-center">
         <div aria-hidden="true" class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#f5e6dc]">
-          <span class="text-2xl text-[#c94f00]"> :D </span>
+          <span class="text-2xl text-[#c94f00]"> $ </span>
         </div>
 
         <h2 class="text-xl font-semibold text-[#22201e]">No accounts yet</h2>
@@ -52,6 +60,9 @@
     </div>
 
     {% else %}
+
+    <!-- Accounts Header -->
+
     <div class="mb-5">
       <h2 class="text-lg font-semibold text-[#22201e]">Your Accounts</h2>
 
@@ -64,22 +75,27 @@
       <article class="rounded-2xl border border-[#eaded5] bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-md">
         <div class="flex items-center justify-between">
           <p class="text-xs font-semibold uppercase tracking-wider text-[#c94f00]">{{ account.account_type.replace("_", " ").title() }}</p>
-          <span aria-hidden="true" class="flex h-9 w-9 items-center justify-center rounded-full bg-[#f5e6dc] text-[#c94f00]"
-            >{% if account.account_type == "digital_wallet" %}
+
+          <span aria-hidden="true" class="flex h-9 w-9 items-center justify-center rounded-full bg-[#f5e6dc] text-[#c94f00]">
+            {% if account.account_type == "digital_wallet" %}
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
               <path d="M16 14h2" />
               <path d="M4 7V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2" />
               <circle cx="17" cy="14" r="1" fill="currentColor" />
             </svg>
+
             {% elif account.account_type == "cash" %}
+
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="6" width="20" height="12" rx="2" />
               <circle cx="12" cy="12" r="2.5" />
               <path d="M6 12h.01" />
               <path d="M18 12h.01" />
             </svg>
+
             {% elif account.account_type == "bank" %}
+
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M3 21h18" />
               <path d="M3 10h18" />
@@ -89,7 +105,9 @@
               <path d="M14 10v8" />
               <path d="M18 10v8" />
             </svg>
+
             {% else %}
+
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="1.5" />
               <circle cx="19" cy="12" r="1.5" />
@@ -99,16 +117,27 @@
             {% endif %}
           </span>
         </div>
+
         <h3 class="mt-5 text-xl font-semibold text-[#22201e]">{{ account.account_name }}</h3>
+
         <div class="mt-6">
           <p class="text-xs text-gray-500">Available Balance</p>
+
           <p class="mt-1 text-3xl font-medium text-[#22201e]">Rs. {{ "{:,.2f}".format(account.balance) }}</p>
         </div>
+        <button
+          type="button"
+          class="edit-account-btn mt-6 w-full cursor-pointer rounded-lg border border-[#eaded5] bg-black/10 px-4 py-2 text-sm font-semibold text-gray-700  transition hover:bg-black/20 active:scale-[0.98]"
+          data-id="{{ account.account_id }}"
+          data-name="{{ account.account_name }}"
+          data-type="{{ account.account_type }}"
+          data-balance="{{ account.balance }}"
+        >
+          Edit Account
+        </button>
       </article>
-
       {% endfor %}
     </div>
-
     {% endif %}
   </section>
   <dialog
@@ -121,19 +150,20 @@
         <div>
           <h2 id="account-modal-title" class="text-xl font-semibold text-[#22201e]">Add Account</h2>
 
-          <p class="mt-1 text-sm text-gray-500">Add an account to your FinTrack.</p>
+          <p id="account-modal-description" class="mt-1 text-sm text-gray-500">Add an account to your FinTrack.</p>
         </div>
 
         <button
           type="button"
           onclick="closeAccountModal()"
-          aria-label="Close add account dialog"
+          aria-label="Close account dialog"
           class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-xl text-gray-500 transition hover:bg-[#f0e5dd] hover:text-gray-800"
         >
           &times;
         </button>
       </header>
-      <form method="POST">
+
+      <form id="accountForm" method="POST" action="{{ url_for('acc.account') }}">
         {{ form.hidden_tag() }}
         <div class="mb-5">
           {{ form.account_name.label( class="mb-2 block text-sm font-medium text-gray-700" ) }} {{ form.account_name( class="w-full rounded-lg border border-[#eaded5] bg-white px-4 py-3 text-sm
@@ -168,6 +198,7 @@
           >
             Cancel
           </button>
+
           {{ form.submit( class="flex-1 cursor-pointer rounded-lg bg-[#c94f00] px-4 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#ad4300] hover:shadow-lg active:scale-[0.98]" )
           }}
         </footer>
@@ -175,20 +206,6 @@
     </div>
   </dialog>
 </main>
-<script>
-  const accountModal = document.getElementById("accountModal");
-
-  function openAccountModal() {
-    accountModal.showModal();
-  }
-  function closeAccountModal() {
-    accountModal.close();
-  }
-  accountModal.addEventListener("click", function (event) {
-    if (event.target === accountModal) {
-      closeAccountModal();
-    }
-  });
-</script>
-
+<script src="{{ url_for('static', filename='account.js') }}"></script>
 {% endblock %}
+

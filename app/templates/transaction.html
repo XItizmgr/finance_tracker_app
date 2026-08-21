@@ -1,0 +1,336 @@
+{% extends "base.html" %}
+
+{% block title %}FinTrack Transactions{% endblock %}
+{% block page_title %}Transactions{% endblock %}
+
+{% block content %}
+
+<main class=" max-w-7xl px-6 py-8">
+  <header class="mb-8 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-semibold text-[#22201e]">
+        Financial Records
+      </h1>
+      <p class="mt-1 text-sm text-gray-500">
+        View and manage your financial transactions.
+      </p>
+    </div>
+    <a
+      href="{{ url_for('trans.transaction') }}"
+      class="cursor-pointer rounded-lg bg-[#c94f00] px-5 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#ad4300] hover:shadow-lg active:scale-[0.98]"
+    >
+      <span class="mr-2 text-lg">+</span>
+      New Transaction
+    </a>
+  </header>
+  <section class="mb-6 rounded-2xl border border-[#eaded5] bg-white p-5 shadow-sm">
+    <form method="GET" action="{{ url_for('trans.transaction') }}">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="lg:col-span-1">
+          <label
+            for="search"
+            class="mb-2 block text-xs font-semibold uppercase tracking-wide text-gray-500"
+          >
+            Search
+          </label>
+          <input
+            id="search"
+            name="search"
+            type="text"
+            value="{{ request.args.get('search', '') }}"
+            placeholder="Search transactions..."
+            class="w-full rounded-lg border border-[#eaded5] bg-[#fffaf6] px-4 py-2.5 text-sm outline-none transition placeholder:text-gray-400 focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10"
+          />
+        </div>
+        <div>
+          <label
+            for="category"
+            class="mb-2 block text-xs font-semibold uppercase tracking-wide text-gray-500"
+          >
+            Category
+          </label>
+
+          <select
+            id="category"
+            name="category"
+            class="w-full rounded-lg border border-[#eaded5] bg-[#fffaf6] px-4 py-2.5 text-sm outline-none transition focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10"
+          >
+            <option value="">All Categories</option>
+            {% for category in categories %}
+            <option
+              value="{{ category.category_id }}"
+              {% if request.args.get('category') == category.category_id|string %}
+                selected
+              {% endif %}
+            >
+              {{ category.name }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div>
+          <label
+            for="account"
+            class="mb-2 block text-xs font-semibold uppercase tracking-wide text-gray-500"
+          >
+            Account
+          </label>
+
+          <select
+            id="account"
+            name="account"
+            class="w-full rounded-lg border border-[#eaded5] bg-[#fffaf6] px-4 py-2.5 text-sm outline-none transition focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10"
+          >
+
+            <option value="">All Accounts</option>
+
+            {% for account in accounts %}
+
+            <option
+              value="{{ account.account_id }}"
+              {% if request.args.get('account') == account.account_id|string %}
+                selected
+              {% endif %}
+            >
+              {{ account.account_name }}
+            </option>
+
+            {% endfor %}
+
+          </select>
+
+        </div>
+
+        <div>
+
+          <label
+            for="type"
+            class="mb-2 block text-xs font-semibold uppercase tracking-wide text-gray-500"
+          >
+            Type
+          </label>
+
+          <select
+            id="type"
+            name="type"
+            class="w-full rounded-lg border border-[#eaded5] bg-[#fffaf6] px-4 py-2.5 text-sm outline-none transition focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10"
+          >
+
+            <option value="">All Types</option>
+
+            <option
+              value="income"
+              {% if request.args.get('type') == 'income' %}
+                selected
+              {% endif %}
+            >
+              Income
+            </option>
+
+            <option
+              value="expense"
+              {% if request.args.get('type') == 'expense' %}
+                selected
+              {% endif %}
+            >
+              Expense
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+      <div class="mt-4 flex justify-end gap-3">
+        <a
+          href="{{ url_for('trans.transaction') }}"
+          class="rounded-lg border border-[#eaded5] bg-white px-4 py-2 text-sm font-semibold text-gray-700 transition hover:bg-[#f7eee8]"
+        >
+          Clear
+        </a>
+        <button
+          type="submit"
+          class="cursor-pointer rounded-lg bg-[#c94f00] px-5 py-2 text-sm font-semibold text-white transition hover:bg-[#ad4300]"
+        >
+          Apply Filters
+        </button>
+      </div>
+    </form>
+  </section>
+  <section class="overflow-hidden rounded-2xl border border-[#eaded5] bg-white shadow-sm">
+    {% if transactions %}
+    <div class="overflow-x-auto">
+      <table class="w-full min-w-[1000px]">
+        <thead class="border-b border-[#eaded5] bg-[#fffaf6]">
+          <tr>
+            <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+              Transaction
+            </th>
+            <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+              Category
+            </th>
+            <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+              Date
+            </th>
+            <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+              Account
+            </th>
+            <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+              Type
+            </th>
+            <th class="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-gray-500">
+              Amount
+            </th>
+            <th class="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-gray-500">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-[#f0e5dd]">
+          {% for transaction in transactions %}
+          <tr class="transition hover:bg-[#fffaf6]">
+            <td class="px-6 py-5">
+              <div>
+                <p class="font-semibold text-[#22201e]">
+                  {{ transaction.title }}
+                </p>
+
+                {% if transaction.description %}
+
+                <p class="mt-1 max-w-xs truncate text-xs text-gray-500">
+                  {{ transaction.description }}
+                </p>
+
+                {% endif %}
+
+              </div>
+
+            </td>
+            <td class="px-6 py-5">
+              <span
+                class="inline-flex rounded-full bg-[#f5e6dc] px-3 py-1 text-xs font-medium text-[#c94f00]"
+              >
+                {{ transaction.category.name }}
+              </span>
+
+            </td>
+            <td class="px-6 py-5 text-sm text-gray-600">
+
+              {{ transaction.transaction_date.strftime("%b %d, %Y") }}
+
+            </td>
+            <td class="px-6 py-5">
+
+              <p class="text-sm font-medium text-[#22201e]">
+                {{ transaction.account.account_name }}
+              </p>
+
+            </td>
+            <td class="px-6 py-5">
+
+              {% if transaction.transaction_type == "income" %}
+
+              <span class="rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700">
+                Income
+              </span>
+
+              {% else %}
+
+              <span class="rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-700">
+                Expense
+              </span>
+
+              {% endif %}
+
+            </td>
+            <td class="px-6 py-5 text-right">
+
+              {% if transaction.transaction_type == "income" %}
+
+              <span class="font-semibold text-green-600">
+                +Rs. {{ "{:,.2f}".format(transaction.amount) }}
+              </span>
+
+              {% else %}
+
+              <span class="font-semibold text-red-600">
+                -Rs. {{ "{:,.2f}".format(transaction.amount) }}
+              </span>
+
+              {% endif %}
+
+            </td>
+            <td class="px-6 py-5">
+
+              <div class="flex justify-end gap-2">
+                <a
+                  href="{{ url_for('trans.edit_transaction', transaction_id=transaction.transaction_id) }}"
+                  class="rounded-lg border border-[#eaded5] bg-white px-3 py-2 text-xs font-semibold text-gray-700 transition hover:bg-[#f7eee8]"
+                >
+                  Edit
+                </a>
+                <form
+                  method="POST"
+                  action="{{ url_for('trans.delete_transaction', transaction_id=transaction.transaction_id) }}"
+                  onsubmit="return confirm('Are you sure you want to delete this transaction?');"
+                >
+
+                  <input
+                    type="hidden"
+                    name="csrf_token"
+                    value="{{ csrf_token() }}"
+                  >
+
+                  <button
+                    type="submit"
+                    class="cursor-pointer rounded-lg border border-red-200 bg-white px-3 py-2 text-xs font-semibold text-red-600 transition hover:bg-red-50"
+                  >
+                    Delete
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <footer class="flex items-center justify-between border-t border-[#eaded5] bg-[#fffaf6] px-6 py-4">
+
+      <p class="text-sm text-gray-500">
+        Showing
+        {{ transactions|length }}
+        transaction{% if transactions|length != 1 %}s{% endif %}
+      </p>
+    </footer>
+    {% else %}
+    <div class="flex min-h-[400px] items-center justify-center">
+      <div class="max-w-md text-center">
+        <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#f5e6dc]">
+          <span class="text-2xl text-[#c94f00]">
+            :D
+          </span>
+        </div>
+        <h2 class="text-xl font-semibold text-[#22201e]">
+          No Transactions Yet
+        </h2>
+        <p class="mt-2 text-sm leading-6 text-gray-500">
+          You haven't added any transactions yet.
+          Start tracking your income and expenses.
+        </p>
+        <a
+          href="{{ url_for('trans.transaction') }}"
+          class="mt-4 inline-block cursor-pointer rounded-lg bg-[#c94f00] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#ad4300] active:scale-[0.98]"
+        >
+          <span class="mr-1">
+            +
+          </span>
+          Add Transaction
+        </a>
+      </div>
+    </div>
+    {% endif %}
+  </section>
+</main>
+<script src="{{url_for('static',filename='transaction.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,44 @@
+{%extends "base.html"%} {% block title %} FinTrack Budget {% endblock%} {% block page_title %} Budget {% endblock%} {% block content%} 
+<section>
+<header class="mb-6 flex items-center justify-between">
+    <div>
+        <h2 class="text-2xl font-semibold text-gray-900" id="budget-title">
+            Budget Planner
+        </h2>
+        <p class="mt-1 text-sm text-[#8b6f63]">
+            Manage your monthly allocation and track spending in real-time.
+        </p>
+    </div>
+    <button type="button" class="flex items-center gap-2 rounded-lg bg-[#a94300] px-5 py-3 text-sm font-semibold text-white shadow-md transition  hover:bg-[#8e3800]>
+  <span aria-hidden="true" class="text-lg leading-none">+</span>
+        Create New Budget
+    </button>
+</header>
+<section>
+    <h3 id="budget-summary-title">
+        Budget Summary
+    </h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <article class="relative overflow-hidden rounded-lg border border-[#eee3dc] bg-white px-5 py-5 shadow-sm">
+        <header>
+        <p class="text-[10px] font-medium uppercase text-[#735d53]">
+        Total Monthly Budget
+        </p>
+        </header>
+    </article>
+    </div>
+</section>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+{% endblock%}
