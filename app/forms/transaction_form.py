@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, DecimalField, DateTimeField, SubmitField,TextAreaField
+from wtforms import StringField, SelectField, DecimalField, DateField, SubmitField,TextAreaField
 from wtforms.validators import DataRequired
 
 
@@ -13,6 +13,6 @@ class TransactionForm(FlaskForm):
     amount = DecimalField("Enter the amount", validators=[DataRequired()])
     account_id = SelectField("",validators=[DataRequired()])
     category_id = SelectField("",validators=[DataRequired()])
-    description = TextAreaField("some description about it")
-    transaction_date = DateTimeField("enter your date", validators=[DataRequired()])
+    description = TextAreaField("Some description about it")
+    transaction_date = DateField("Enter your date", validators=[DataRequired()])
     submit = SubmitField("Add Transcation ")

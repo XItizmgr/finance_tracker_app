@@ -10,7 +10,7 @@ from app.models.category import Category
 trans_bp = Blueprint("trans", __name__)
 
 
-@trans_bp.route("/transaction", methods=["POST", "GET"])
+@trans_bp.route("/transaction", methods=["GET", "POST"])
 @login_required
 def transaction():
     form = TransactionForm()
@@ -38,11 +38,27 @@ def transaction():
         flash("Transaction added successfully!", "success")
         return redirect(url_for("trans.transaction"))
     search = request.args.get("search", "").strip()
+    category_id = request.args.get("category")
+    account_id = request.args.get("account")
+    transaction_type = request.args.get("type")
     transaction_query = Transaction.query.filter_by(user_id=current_user.user_id)
     if search:
         transaction_query = transaction_query.filter(
             Transaction.title.ilike(f"%{search}%")
         )
+    if category_id:
+        transaction_query = transaction_query.filter(
+            Transaction.category_id == int(category_id)
+        )
+    if account_id:
+        transaction_query = transaction_query.filter(
+            Transaction.account_id == int(account_id)
+        )
+    if transaction_type:
+        transaction_query = transaction_query.filter(
+            Transaction.transaction_type == transaction_type
+        )
+
     transactions = transaction_query.order_by(Transaction.transaction_date.desc()).all()
     return render_template(
         "transaction.html",
@@ -51,6 +67,7 @@ def transaction():
         accounts=accounts,
         categories=categories,
         search=search,
+        edit_transaction=None,
     )
 
 
@@ -80,18 +97,27 @@ def edit_transaction(transaction_id):
         db.session.commit()
         flash("Transaction updated successfully!", "success")
         return redirect(url_for("trans.transaction"))
+
     if request.method == "GET":
         form.title.data = transaction.title
         form.amount.data = transaction.amount
         form.transaction_type.data = transaction.transaction_type
         form.account_id.data = transaction.account_id
         form.category_id.data = transaction.category_id
-        form.description.data - transaction.description
+        form.description.data = transaction.description
         form.transaction_date.data = transaction.transaction_date
+    transactions = (
+        Transaction.query.filter_by(user_id=current_user.user_id)
+        .order_by(Transaction.transaction_date.desc())
+        .all()
+    )
     return render_template(
-        "transaction_edit.html",
+        "transaction.html",
         form=form,
-        transaction=transaction,
+        transactions=transactions,
+        accounts=accounts,
+        categories=categories,
+        edit_transaction=transaction,
     )
 @trans_bp.route("/transaction/delete/<int:transaction_id>", methods=["POST"])
 @login_required
@@ -101,5 +127,5 @@ def delete_transaction(transaction_id):
     ).first_or_404()
     db.session.delete(transaction)
     db.session.commit()
-    flash("Transaction deleted successfully", "success")
+    flash("Transaction deleted successfully", "error")
     return redirect(url_for("trans.transaction"))

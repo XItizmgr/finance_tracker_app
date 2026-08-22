@@ -1,14 +1,12 @@
 {% extends "base.html" %} {% block title %}FinTrack Account{% endblock %} {% block page_title %}Account{% endblock %} {% block content %}
 
 <main class="mx-auto max-w-7xl px-6 py-8">
-  <!-- Page Header -->
   <header class="mb-8 flex items-center justify-between">
     <div>
       <h1 class="text-3xl font-semibold text-[#22201e]">Accounts</h1>
 
       <p class="mt-1 text-sm text-gray-500">Manage your financial accounts.</p>
     </div>
-
     <button
       type="button"
       onclick="openAccountModal()"
@@ -19,25 +17,7 @@
     </button>
   </header>
 
-  <!-- Flash Messages -->
-  {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
-
-  <div class="mb-6 space-y-2">
-    {% for category, message in messages %}
-
-    <p class="rounded-lg border border-[#eaded5] bg-white px-4 py-3 text-sm text-gray-700 shadow-sm">{{ message }}</p>
-
-    {% endfor %}
-  </div>
-
-  {% endif %} {% endwith %}
-
-  <!-- Accounts Section -->
-  <section>
     {% if not accounts %}
-
-    <!-- Empty State -->
-
     <div class="flex min-h-[420px] items-center justify-center rounded-2xl border border-[#eaded5] bg-[#fffaf6]">
       <div class="max-w-md text-center">
         <div aria-hidden="true" class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#f5e6dc]">
@@ -60,18 +40,12 @@
     </div>
 
     {% else %}
-
-    <!-- Accounts Header -->
-
     <div class="mb-5">
       <h2 class="text-lg font-semibold text-[#22201e]">Your Accounts</h2>
-
       <p class="mt-1 text-sm text-gray-500">Your available accounts.</p>
     </div>
-
     <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {% for account in accounts %}
-
       <article class="rounded-2xl border border-[#eaded5] bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-md">
         <div class="flex items-center justify-between">
           <p class="text-xs font-semibold uppercase tracking-wider text-[#c94f00]">{{ account.account_type.replace("_", " ").title() }}</p>

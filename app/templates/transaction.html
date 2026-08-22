@@ -24,7 +24,7 @@
   <section class="mb-6 rounded-2xl border border-[#eaded5] bg-white p-5 shadow-sm">
     <form method="GET" action="{{ url_for('trans.transaction') }}">
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="lg:col-span-1"
+        <div class="lg:col-span-1">
           <label
             for="search"
             class="mb-2 block text-xs font-semibold uppercase tracking-wide text-gray-500"
@@ -285,17 +285,25 @@
       <header class="mb-6 flex items-center justify-between ">
         <div>
           <h2 class="text-lg font-semibold text-[#22201e]">
+            {% if edit_transaction %}
+             Edit Transaction
+            {% else %}
             New Transaction
+            {% endif %}
           </h2>
           <p class="mt-1 text-sm text-gray-500">
-            Add a new income or expense.
+            {%if edit_transaction %}
+            Update your transaction details
+            {%else%}
+            Add a new income or expense
+            {%endif%}
           </p>
         </div>
         <button type="button" id="close-transaction-modal"  class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-xl text-gray-500 transition hover:bg-[#f0e5dd] hover:text-gray-800" >
           &times;
         </button>
       </header>
-      <form method="POST" action="{{ url_for('trans.transaction') }}"  class="">
+      <form method="POST" action=" {% if edit_transaction %} {{ url_for('trans.edit_transaction',transaction_id=edit_transaction.transaction_id) }} {%else%}  {{ url_for('trans.transaction') }} {% endif %}">
         {{ form.hidden_tag() }}
         <div class="mb-4">
           {{ form.title.label(  class="mb-2 block text-sm font-medium text-gray-700" ) }}
@@ -382,5 +390,16 @@
     </div>
   </dialog>
 </main>
+{% if edit_transaction %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const modal = document.getElementById("transactionModal");
+
+        if (modal) {
+            modal.showModal();
+        }
+    });
+</script>
+{% endif %}
 <script src="{{ url_for('static', filename='transaction.js') }}"></script>
 {% endblock %}
