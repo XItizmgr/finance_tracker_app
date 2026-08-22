@@ -7,10 +7,12 @@ from app.routes.dashboard import dash_bp
 from app.routes.transactions import trans_bp
 from app.routes.accounts import acc_bp
 from app.routes.budgets import budget_bp
+from app.extensions import csrf
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
     db.init_app(app)
+    csrf.init_app(app)
     login_manager.init_app(app)
     migrate.init_app(app, db)
     app.register_blueprint(auth_bp)

@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from app.models.user import User
+from app.models.category import Category
 from app.forms.register_form import RegisterForm
 from app.forms.login_form import loginForm
 from app.extensions import db
@@ -11,7 +12,7 @@ from app.forms.Forget_password_form import ForgetPassword
 from app.forms.password_reset_form import PasswordRest
 from app.utils.helpers import generate_reset_token
 from app.utils.helpers import verify_reset_token
-from app.services.email_service import send_password_reset_link
+from app.services.email_service import send_password_reset_link,send_Welcome
 
 
 auth_bp = Blueprint("auth", __name__)
@@ -31,8 +32,36 @@ def register():
             email=form.email.data,
             password_hash=hashed_password,
         )
+
         db.session.add(new_user)
+        db.session.flush()
+        default_categories = [
+            ("Food", "expense"),
+            ("Shopping", "expense"),
+            ("Transport", "expense"),
+            ("Bills", "expense"),
+            ("Entertainment", "expense"),
+            ("Education", "expense"),
+            ("Health", "expense"),
+            ("Travel", "expense"),
+            ("Other", "expense"),
+            ("Salary", "income"),
+            ("Freelance", "income"),
+            ("Business", "income"),
+            ("Investment", "income"),
+            ("Side hustle", "income"),
+            ("Other", "income"),
+        ]
+        for name, category_type in default_categories:
+            category = Category(
+                user_id=new_user.user_id, name=name, category_type=category_type
+            )
+            db.session.add(category)
         db.session.commit()
+        try:
+            send_Welcome(new_user.email,new_user.username)
+        except Exception as e:
+            print(e)
         flash("Account created successfully!")
         return redirect(url_for("auth.login"))
 
@@ -86,6 +115,7 @@ def forgetPassword():
         )
 
     return render_template("auth/forget_password.html", form=form)
+
 
 @auth_bp.route("/reset_password/<token>", methods=["POST", "GET"])
 def passwordReset(token):

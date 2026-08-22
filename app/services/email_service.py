@@ -37,3 +37,30 @@ def send_password_reset_link(email, reset_url):
         """,
         }
     )
+
+
+def send_Welcome(email,user):
+    resend.api_key = current_app.config["RESEND_API_KEY"]
+    resend.Emails.send(
+        {
+           "from": "FinTrack <onboarding@resend.dev>",
+            "to": [email],
+            "subject": "Welcome to FinTrack!",
+            "html": f"""
+                <h1>A warm greating from Xitiz</h1>
+                <h2>Welcome {user} To FinTrack</h2>
+                <p>
+                    Your FinTrack account has been successfully created.
+                </p>
+
+                <p>
+                    You can now start tracking your income, expenses,
+                    and financial accounts.
+                </p>
+
+                <p>
+                    Thanks for joining FinTrack!
+                </p>
+            """,
+        }
+    )

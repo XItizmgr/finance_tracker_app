@@ -11,6 +11,8 @@ class Transaction(db.Model):
     category_id = db.Column(
         db.Integer, db.ForeignKey("categories.category_id"), nullable=False
     )
+    category = db.relationship("Category")
+    account = db.relationship("Account")
     amount = db.Column(db.Numeric(12, 2), nullable=False)
     transaction_type = db.Column(db.String(50), nullable=False)
     title = db.Column(db.String(250), nullable=False)
