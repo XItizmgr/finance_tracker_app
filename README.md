@@ -59,12 +59,5 @@ python run.py
 
 
 # Addtional information 
-So for now the  project is Fintrack v1 TwT.. there are still so many feature that i originally planed but couldnt include so fintrack v1 is created where this is just a simple version of my large imagination hehe 
-
-the original plan was to make fintrack one of the best fainance tracking webapp with the help of ai assistance, automation, receipt scanning, file imports, and more advanced financial analysis.
-
-but because my exam are getting closer , i decided to leave all of this feature and just make a simple v1 first but in version 2 the given feature will be added: 
-- AI chatbot for automation 
-- receipt scaning 
-- file importing like excel and other file 
-- UI will be significantly improve 
+So this project was supposed to have ai assistence chat bot for automation and other many feature like
+uploading recipt excel file and other things  but due to the deadline of
