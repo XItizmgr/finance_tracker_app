@@ -6,7 +6,7 @@ from app.models.category import Category
 from app.forms.register_form import RegisterForm
 from app.forms.login_form import loginForm
 from app.extensions import db
-from flask_login import login_user
+from flask_login import login_user,logout_user
 
 from app.forms.Forget_password_form import ForgetPassword
 from app.forms.password_reset_form import PasswordRest
@@ -83,11 +83,11 @@ def login():
         return redirect(url_for("dashboard.dashboard"))
     return render_template("auth/login.html", form=form)
 
-
-@auth_bp.route("/base")
-def base():
-    return render_template("base.html")
-
+@auth_bp.route("/logout")
+def logout():
+    logout_user()
+    flash("you have been logout succefully :(","success")
+    return redirect(url_for("auth.login"))
 
 @auth_bp.route("/forget_password", methods=["GET", "POST"])
 def forgetPassword():

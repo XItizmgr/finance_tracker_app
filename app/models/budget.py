@@ -12,6 +12,8 @@ class Budget(db.Model):
     end_date = db.Column(db.Date, nullable=False)
     alert_percentage = db.Column(db.Integer, default=80)
     is_active = db.Column(db.Boolean, default=True)
+    user = db.relationship("User", backref="Budget")
+    category = db.relationship("Category", backref="Budget")
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(
         db.DateTime, server_default=db.func.now(), onupdate=db.func.now()

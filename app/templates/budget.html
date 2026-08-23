@@ -1,44 +1,175 @@
-{%extends "base.html"%} {% block title %} FinTrack Budget {% endblock%} {% block page_title %} Budget {% endblock%} {% block content%} 
+{% extends "base.html" %} {% block title %} FinTrack Budget {% endblock %} {% block page_title %} Budget {% endblock %} {% block content %}
+
 <section>
-<header class="mb-6 flex items-center justify-between">
+  <header class="mb-8 flex items-center justify-between">
     <div>
-        <h2 class="text-2xl font-semibold text-gray-900" id="budget-title">
-            Budget Planner
-        </h2>
-        <p class="mt-1 text-sm text-[#8b6f63]">
-            Manage your monthly allocation and track spending in real-time.
-        </p>
+      <h2 class="text-2xl font-semibold text-gray-900">Budget Planner</h2>
+
+      <p class="mt-1 text-sm text-[#8b6f63]">Manage your monthly allocation and track spending in real-time.</p>
     </div>
-    <button type="button" class="flex items-center gap-2 rounded-lg bg-[#a94300] px-5 py-3 text-sm font-semibold text-white shadow-md transition  hover:bg-[#8e3800]>
-  <span aria-hidden="true" class="text-lg leading-none">+</span>
-        Create New Budget
+
+    <button
+      type="button"
+      id="new-budget-btn"
+      class="flex items-center gap-2 rounded-full bg-[#a94300] px-5 py-3 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:bg-[#8e3800] active:scale-[0.98]"
+    >
+      <span class="text-lg leading-none"> + </span>
+
+      Create New Budget
     </button>
-</header>
-<section>
-    <h3 id="budget-summary-title">
-        Budget Summary
-    </h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <article class="relative overflow-hidden rounded-lg border border-[#eee3dc] bg-white px-5 py-5 shadow-sm">
-        <header>
-        <p class="text-[10px] font-medium uppercase text-[#735d53]">
-        Total Monthly Budget
-        </p>
-        </header>
-    </article>
+  </header>
+  <section class="mb-8">
+    <h3 class="mb-4 text-lg font-semibold text-gray-900">Budget Summary</h3>
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <article class="relative overflow-hidden rounded-xl border border-[#eee3dc] bg-white px-5 py-5 shadow-sm">
+        <p class="text-[10px] font-medium uppercase tracking-wide text-[#735d53]">Total Monthly Budget</p>
+
+        <p class="mt-3 text-3xl font-semibold text-[#a94300]">Rs. {{ "{:,.2f}".format(total_budget) }}</p>
+
+        <p class="mt-2 text-xs text-[#8b6f63]">Across all your budgets</p>
+      </article>
+      <article class="relative overflow-hidden rounded-xl border border-[#eee3dc] bg-white px-5 py-5 shadow-sm">
+        <p class="text-[10px] font-medium uppercase tracking-wide text-[#735d53]">Total Spent</p>
+        <p class="mt-3 text-3xl font-semibold text-[#735d53]">Rs. {{ "{:,.2f}".format(total_spent) }}</p>
+        <div class="mt-4 h-2 overflow-hidden rounded-full bg-[#eee3dc]">
+          <div class="h-full rounded-full bg-[#a94300] transition-all duration-300" style="width: {{ (total_spent / total_budget * 100) if total_budget > 0 else 0 }}%;"></div>
+        </div>
+        <p class="mt-2 text-xs text-[#8b6f63]">{{ "{:.1f}".format( (total_spent / total_budget * 100) if total_budget > 0 else 0 ) }}% of budget used</p>
+      </article>
+      <article class="relative overflow-hidden rounded-xl border border-[#eee3dc] bg-white px-5 py-5 shadow-sm">
+        <p class="text-[10px] font-medium uppercase tracking-wide text-[#735d53]">Remaining to Spend</p>
+        <p class="mt-3 text-3xl font-semibold text-[#a94300]">Rs. {{ "{:,.2f}".format(total_remaining) }}</p>
+        <p class="mt-2 text-xs text-[#8b6f63]">Based on current budget allocation</p>
+      </article>
     </div>
+  </section>
+  <section>
+    <div class="mb-5">
+      <h3 class="text-lg font-semibold text-gray-900">Your Budgets</h3>
+      <p class="mt-1 text-sm text-[#8b6f63]">Track your spending limits by category.</p>
+    </div>
+    {% if budgets %}
+    <div class="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+      {% for budget in budgets %}
+      <article class="rounded-xl border border-[#eee3dc] bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md">
+        <header class="mb-6 flex items-start justify-between">
+          <div class="flex items-center gap-3">
+            <div class="flex h-11 w-11 items-center justify-center rounded-lg bg-[#f5e6dc]">
+              <span class="text-lg font-semibold text-[#a94300]"> $ </span>
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900">{{ budget.name }}</h4>
+
+              <p class="text-xs text-[#8b6f63]">{% if budget.category %} {{ budget.category.name }} {% else %} Budget {% endif %}</p>
+            </div>
+          </div>
+        </header>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <p class="text-xs text-[#8b6f63]">Spent</p>
+            <p class="mt-1 font-semibold text-gray-900">Rs. {{ "{:,.2f}".format(budget.spent) }}</p>
+          </div>
+          <div>
+            <p class="text-xs text-[#8b6f63]">Limit</p>
+            <p class="mt-1 font-semibold text-gray-900">Rs. {{ "{:,.2f}".format(budget.amount|float) }}</p>
+          </div>
+        </div>
+        <div class="mt-5">
+          <div class="h-2 overflow-hidden rounded-full bg-[#eee3dc]">
+            <div class="h-full rounded-full bg-[#a94300] transition-all duration-300" style="width: {{ budget.progress }}%;"></div>
+          </div>
+        </div>
+        <footer class="mt-3 flex items-center justify-between">
+          {% if budget.spent == 0 %}
+          <span class="text-xs font-medium text-[#a94300]"> No spending yet </span>
+          {% elif budget.progress >= 100 %}
+          <span class="text-xs font-medium text-red-600"> Budget exceeded </span>
+          {% elif budget.progress >= 80 %}
+          <span class="text-xs font-medium text-orange-600"> Near limit </span>
+          {% else %}
+          <span class="text-xs font-medium text-[#a94300]"> {{ "{:.1f}".format(budget.progress) }}% used </span>
+          {% endif %}
+          <span class="text-xs text-[#8b6f63]">
+            {% if budget.remaining >= 0 %} Rs. {{ "{:,.2f}".format(budget.remaining) }} remaining {% else %} Rs. {{ "{:,.2f}".format(budget.remaining|abs) }} over budget {% endif %}
+          </span>
+        </footer>
+        <div class="mt-4 border-t border-[#eee3dc] pt-3 text-xs text-gray-400">
+          {{ budget.start_date.strftime("%b %d, %Y") }}
+          <span class="mx-1"> → </span>
+          {{ budget.end_date.strftime("%b %d, %Y") }}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="flex min-h-[350px] items-center justify-center rounded-xl border border-[#eee3dc] bg-white">
+      <div class="max-w-md text-center">
+        <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#f5e6dc]">
+          <span class="text-2xl text-[#a94300]"> :D </span>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900">No Budgets Yet</h3>
+        <p class="mt-2 text-sm leading-6 text-gray-500">Create your first budget to start tracking your spending.</p>
+        <button type="button" id="empty-new-budget-btn" class="mt-5 cursor-pointer rounded-lg bg-[#a94300] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#8e3800]">
+          + Create Budget
+        </button>
+      </div>
+    </div>
+    {% endif %}
+  </section>
+  <dialog
+    id="budgetModal"
+    class="fixed left-1/2 top-1/2 m-0 w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border-0 bg-[#fffaf6] p-0 shadow-2xl backdrop:bg-black/40"
+  >
+    <div class="p-6">
+      <div class="mb-6 flex items-start justify-between">
+        <div>
+          <h2 class="text-lg font-semibold text-gray-900">Create New Budget</h2>
+          <p class="mt-1 text-sm text-gray-500">Set a spending limit for a category.</p>
+        </div>
+        <button
+          type="button"
+          id="close-budget-modal"
+          class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-xl text-gray-500 transition hover:bg-[#f0e5dd] hover:text-gray-800"
+        >
+          &times;
+        </button>
+      </div>
+      <form method="POST" action="{{ url_for('budget.budget') }}" class="space-y-4">
+        {{ form.hidden_tag() }}
+        <div>
+          {{ form.name.label( class="mb-2 block text-sm font-medium text-gray-700" ) }} {{ form.name( class="w-full rounded-lg border border-[#eaded5] bg-white px-4 py-3 text-sm outline-none
+          transition focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10", placeholder="e.g. Monthly Food Budget" ) }} {% for error in form.name.errors %}
+          <p class="mt-1 text-xs text-red-500">{{ error }}</p>
+          {% endfor %}
+        </div>
+        <div>
+          {{ form.amount.label( class="mb-2 block text-sm font-medium text-gray-700" ) }} {{ form.amount( class="w-full rounded-lg border border-[#eaded5] bg-white px-4 py-3 text-sm outline-none
+          transition focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10", placeholder="e.g. 5000" ) }} {% for error in form.amount.errors %}
+          <p class="mt-1 text-xs text-red-500">{{ error }}</p>
+          {% endfor %}
+        </div>
+        <div>
+          {{ form.category_id.label( class="mb-2 block text-sm font-medium text-gray-700" ) }} {{ form.category_id( class="w-full rounded-lg border border-[#eaded5] bg-white px-4 py-3 text-sm
+          outline-none transition focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10" ) }} {% for error in form.category_id.errors %}
+          <p class="mt-1 text-xs text-red-500">{{ error }}</p>
+          {% endfor %}
+        </div>
+        <div>
+          {{ form.start_date.label( class="mb-2 block text-sm font-medium text-gray-700" ) }} {{ form.start_date( class="w-full rounded-lg border border-[#eaded5] bg-white px-4 py-3 text-sm
+          outline-none transition focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10" ) }}
+        </div>
+        <div>
+          {{ form.end_date.label( class="mb-2 block text-sm font-medium text-gray-700" ) }} {{ form.end_date( class="w-full rounded-lg border border-[#eaded5] bg-white px-4 py-3 text-sm outline-none
+          transition focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10" ) }}
+        </div>
+        <div>
+          {{ form.alert_percentage.label( class="mb-2 block text-sm font-medium text-gray-700" ) }} {{ form.alert_percentage( class="w-full rounded-lg border border-[#eaded5] bg-white px-4 py-3
+          text-sm outline-none transition focus:border-[#9e3c01] focus:ring-2 focus:ring-[#9e3c01]/10", placeholder="80" ) }}
+        </div>
+        {{ form.submit( class="w-full cursor-pointer rounded-lg bg-[#a94300] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#8e3800]" ) }}
+      </form>
+    </div>
+  </dialog>
 </section>
 
-
-</section>
-
-
-
-
-
-
-
-
-
-
-{% endblock%}
+{% endblock %}

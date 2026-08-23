@@ -8,6 +8,7 @@ from app.routes.transactions import trans_bp
 from app.routes.accounts import acc_bp
 from app.routes.budgets import budget_bp
 from app.extensions import csrf
+from app.routes.version2 import ver_bp
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -20,6 +21,7 @@ def create_app():
     app.register_blueprint(dash_bp)
     app.register_blueprint(trans_bp)
     app.register_blueprint(acc_bp)
+    app.register_blueprint(ver_bp)
     app.register_blueprint(budget_bp)
     from app.models import User, Account, Category,Budget,Notification,Saving,Transaction
     return app
