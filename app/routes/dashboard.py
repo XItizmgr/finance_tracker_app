@@ -6,12 +6,14 @@ from collections import defaultdict
 from datetime import datetime
 
 
+
 dash_bp = Blueprint("dashboard", __name__)
 
 
 @dash_bp.route("/dashboard")
 @login_required
 def dashboard():
+
 
     accounts = Account.query.filter_by(
         user_id=current_user.user_id

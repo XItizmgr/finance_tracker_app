@@ -5,7 +5,13 @@
     <div>
       <h1 class="text-3xl font-semibold text-[#22201e]">Dashboard</h1>
 
-      <p class="mt-1 text-sm text-gray-500">Hi {{ user }}, here's your financial overview for {{ current_month }}.</p>
+      <p class="mt-1 text-sm text-gray-500">
+        Hi
+        <span class="font-semibold text-gray-900"> {{ current_user.username }} </span>
+        <span class="text-gray-400">,</span>
+        here's your financial overview for
+        <span class="font-medium text-gray-700"> {{ current_month }} </span>.
+      </p>
     </div>
 
     <a

@@ -62,11 +62,11 @@
               Smart tracking meets automated insights. FinTrack helps you organize your money, optimize spending, and reach your savings goals faster with AI-driven budgeting.
             </p>
             <div class="mt-6 flex items-center gap-3">
-              <a href="#get-started" class="rounded-xl bg-[#9e3c01] px-5 py-3 text-base font-semibold text-white transition-all duration-200 hover:bg-[#873300]">
+              <a href="{{url_for('auth.register')}}" class="rounded-xl bg-[#9e3c01] px-5 py-3 text-base font-semibold text-white transition-all duration-200 hover:bg-[#873300]">
                 Get Started for Free
                 <span class="ml-1" aria-hidden="true">&rarr;</span>
               </a>
-              <a href="#watch-demo" class="rounded-xl border border-[#ecd9d1] px-5 py-3 text-base font-semibold text-black transition-all duration-200 hover:bg-[#f8eee8]"> Watch Demo </a>
+              <a href="{{url_for('auth.register')}}" class="rounded-xl border border-[#ecd9d1] px-5 py-3 text-base font-semibold text-black transition-all duration-200 hover:bg-[#f8eee8]"> Watch Demo </a>
             </div>
           </div>
 
@@ -190,7 +190,7 @@
                 <li>-> Monthly Reports</li>
               </ul>
 
-              <button class="mt-8 w-full rounded-lg border border-[#ecd9d1] py-2 text-l font-medium text-[#1d1b19] transition hover:bg-[#fdf7f2]">Current Plan</button>
+              <a href="{{url_for('ver.setting')}}" class="mt-8 w-full block text-center rounded-full border border-[#ecd9d1] py-2 text-l font-medium text-[#1d1b19] transition hover:bg-[#fdf7f2]">Current Plan</a>
             </div>
             <div class="relative rounded-2xl border border-[#c85110] bg-white p-4 py-7 shadow-[0_8px_20px_rgba(158,60,1,0.15)] transition-all duration-200 hover:scale-[1.01] hover:shadow-lg">
               <div class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#9e3c01] px-4 py-1 text-l font-semibold text-white">MOST POPULAR</div>
@@ -209,7 +209,7 @@
                 <li>-> Shared Household Wallets</li>
               </ul>
 
-              <button class="mt-6 w-full rounded-lg bg-[#9e3c01] py-2 text-l font-semibold text-white transition hover:bg-[#873300]">Get Pro</button>
+              <a href="{{url_for('ver.setting')}}" class="mt-6 w-full  block text-center rounded-full bg-[#9e3c01] py-2 text-l font-semibold text-white transition hover:bg-[#873300]">Get Pro</a>
             </div>
 
             <div class="rounded-2xl border border-[#eee0d8] bg-white p-4 transition-all duration-200 hover:scale-[1.01] hover:border-[#c85110] hover:shadow-md">
@@ -227,7 +227,7 @@
                 <li>-> Dedicated Support</li>
               </ul>
 
-              <button class="mt-6 w-full rounded-lg border border-[#ecd9d1] py-2 text-l font-medium text-[#1d1b19] transition hover:bg-[#fdf7f2]">Contact Sales</button>
+              <a href="{{url_for('ver.setting')}}" class="mt-6 w-full block text-center rounded-full border border-[#ecd9d1] py-2 text-l font-medium text-[#1d1b19] transition hover:bg-[#fdf7f2]">Contact Sales</a>
             </div>
           </div>
         </div>
