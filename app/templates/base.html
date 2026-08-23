@@ -16,7 +16,10 @@
         <nav class="mt-10 flex-1">
           <ul class="space-y-2">
             <li>
-              <a href="{{url_for('dashboard.dashboard')}}" class="flex items-center gap-4 rounded-lg px-4 py-3 bg-[#9e3c01] text-[#e6e8f3]">
+              <a
+                href="{{url_for('dashboard.dashboard')}}"
+                class="flex items-center gap-4 rounded-lg px-4 py-3 {% if request.endpoint == 'dashboard.dashboard' %} bg-[#9e3c01] text-[#e6e8f3] {% else %} text-[#594339] hover:bg-[#e3d8ce] {% endif %}"
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <rect width="7" height="9" x="3" y="3" rx="1" />
                   <rect width="7" height="5" x="14" y="3" rx="1" />
@@ -27,8 +30,11 @@
               </a>
             </li>
             <li>
-              <a href="{{url_for('trans.transaction')}}" class="flex items-center gap-4 rounded-lg px-4 py-3 text-[#594339] hover:bg-[#e3d8ce]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#533522" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <a
+                href="{{url_for('trans.transaction')}}"
+                class="flex items-center gap-4 rounded-lg px-4 py-3 {% if request.endpoint == 'trans.transaction' %} bg-[#9e3c01] text-[#e6e8f3] {% else %} text-[#594339] hover:bg-[#e3d8ce] {% endif %}"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M4 2v14a3 3 0 0 0 3 3h14" />
                   <path d="M18 19V2l-2.5 1.5L13 2l-2.5 1.5L8 2L5.5 3.5 4 2" />
                   <line x1="8" y1="7" x2="14" y2="7" />
@@ -40,8 +46,11 @@
               </a>
             </li>
             <li>
-              <a href="{{url_for('acc.account')}}" class="flex items-center gap-4 rounded-lg px-4 py-3 text-[#594339] hover:bg-[#e3d8ce]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#533522" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <a
+                href="{{url_for('acc.account')}}"
+                class="flex items-center gap-4 rounded-lg px-4 py-3 {% if request.endpoint == 'acc.account' %} bg-[#9e3c01] text-[#e6e8f3] {% else %} text-[#594339] hover:bg-[#e3d8ce] {% endif %}"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <polygon points="12 2 2 7 22 7 12 2" />
                   <line x1="5" y1="11" x2="5" y2="17" />
                   <line x1="12" y1="11" x2="12" y2="17" />
@@ -53,7 +62,10 @@
               </a>
             </li>
             <li>
-              <a href="{{url_for('budget.budget')}}" class="flex items-center gap-4 rounded-lg px-4 py-3 text-[#594339] hover:bg-[#e3d8ce]">
+              <a
+                href="{{url_for('budget.budget')}}"
+                class="flex items-center gap-4 rounded-lg px-4 py-3 {% if request.endpoint == 'budget.budget' %} bg-[#9e3c01] text-[#e6e8f3] {% else %} text-[#594339] hover:bg-[#e3d8ce] {% endif %}"
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z" />
                   <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
@@ -76,8 +88,8 @@
         </nav>
 
         <div class="space-y-2 pt-4">
-          <a href="#" class="block rounded-lg bg-[#9f3c00] px-4 py-3 text-center text-sm font-semibold text-white hover:bg-[#cc4e00] transition-colors"> Upgrade Plan </a>
-          <a href="#" class="flex items-center gap-4 rounded-lg px-4 py-3 text-[#594339] hover:bg-[#e3d8ce]">
+          <a href="{{url_for('ver.setting')}}" class="block rounded-lg bg-[#9f3c00] px-4 py-3 text-center text-sm font-semibold text-white hover:bg-[#cc4e00] transition-colors"> Upgrade Plan </a>
+          <a href="{{url_for('ver.setting')}}" class="flex items-center gap-4 rounded-lg px-4 py-3 text-[#594339] hover:bg-[#e3d8ce]">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
               <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
@@ -85,7 +97,7 @@
             </svg>
             <span>Help Center</span>
           </a>
-          <a href="#" class="flex items-center gap-4 rounded-lg px-4 py-3 text-[#594339] hover:bg-[#e3d8ce]">
+          <a href="{{url_for('auth.logout')}}" class="flex items-center gap-4 rounded-lg px-4 py-3 text-[#594339] hover:bg-[#e3d8ce]">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="m16 17 5-5-5-5" />
               <path d="M21 12H9" />
@@ -100,7 +112,6 @@
       <header class="h-20 bg-[#fff8f2] border-b-1 border-[#bfbfbf] flex items-center justify-between px-8">
         <h1 class="text-2xl font-semibold text-gray-800">{% block page_title %}Dashboard{% endblock %}</h1>
         <div class="flex items-center gap-6">
-          
           <div>
             <!-- profile -->
           </div>
