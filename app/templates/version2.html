@@ -12,7 +12,7 @@
       <h2 class="text-2xl font-semibold">Click here to go to landing page</h2>
       <a
         href="{% if current_user.is_authenticated %}
-              {{ url_for('dash.dashboard') }}
+              {{ url_for('dashboard.dashboard') }}
           {% else %}
               {{ url_for('main.home') }}
           {% endif %}"
