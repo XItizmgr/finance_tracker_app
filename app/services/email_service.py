@@ -6,7 +6,7 @@ def send_password_reset_link(email, reset_url):
     resend.api_key = current_app.config["RESEND_API_KEY"]
     resend.Emails.send(
         {
-            "from": "FinTrack <onboarding@resend.dev>",
+            "from": "FinTrack <no-reply@fintracknepal.xyz>",
             "to": [email],
             "subject": "Reset your FinTrack password",
             "html": f"""
