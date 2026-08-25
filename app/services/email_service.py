@@ -44,7 +44,7 @@ def send_Welcome(email, user):
 
     resend.Emails.send(
         {
-            "from": "FinTrack <onboarding@resend.dev>",
+            "from":  "FinTrack <no-reply@fintracknepal.xyz>",
             "to": [email],
             "subject": "Welcome to FinTrack!",
             "html": f"""
