@@ -25,6 +25,21 @@ Fintrack is a finance tracking web app which help user to understand  their fina
 - it is represent in  a beautiful chart 
 ![alt text](image-3.png)
 
+
+# How to use Fintrack ?
+-  First u have to register as a u would do on a website with email and creating password.
+- login in the register email.
+ ![alt text](image-6.png)
+- Will be redirected to dashboard all the number will be zero for new user. 
+- at the left side bar u will see different section (eg:transaction,account,budget).
+- First create an account that u use on daily based like digital wallet (esewa) , mbl banking ,etc.
+![alt text](image-7.png)
+- After creating account u can add the transaction on that account (the money that u added on the account will decrease as u add transaction of type expense).
+![alt text](image-8.png)
+- like that u can use FIntrack hope this help :D...
+
+
+
 # Tech Stack
 ## Backend
 - Python
