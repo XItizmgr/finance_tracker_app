@@ -70,6 +70,12 @@ eg: SECRECT_KEY = "your secrect key"
 - Then run the project 
 python run.py 
 
+# AI usage
+- the ui design is made from  google stitch even tho its created from stitch 80% of desing i had to change or remove the feature.
+- the content like writing is from google search . 
+- the picture in the landing page is generated using google gemini.
+- other then that i use chatgpt as a learning and to review my code and for chart in dashboard mainly .
+
 
 # Addtional information 
 So for now the  project is Fintrack v1 TwT.. there are still so many feature that i originally planed but couldnt include so fintrack v1 is created where this is just a simple version of my large imagination hehe 
